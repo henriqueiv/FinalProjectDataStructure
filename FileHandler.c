@@ -1,64 +1,74 @@
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "Constantes.h"
+#define PRINT_RETORNOS_PARSE 0
 
-char *inputFile;
-char *outputFile;
+FILE *inputFile;
+FILE *outputFile;
 
-void setInputFile(char file[STR_BUFFER]) {
-    inputFile = (char*) malloc(sizeof (char) * strlen(file));
-    inputFile = file;
-}
-
-void setInputFile(char file[STR_BUFFER]) {
-    outputFile = (char*) malloc(sizeof (char) * strlen(file));
-    outputFile = file;
-}
-
-// Só é feito write no arquivo de saída
-
-int writeFile(char *texto) {
-    FILE *file = fopen(outputFile, "a+");
-    if (file == NULL) {
+int setInputFile(char file[STR_BUFFER]) {
+    inputFile = fopen(file, "r");
+    if (inputFile == NULL) {
         perror("Erro abrindo no arquivo");
         return ERRO;
     }
-
-    fwrite(texto, sizeof (char), sizeof (texto), file);
-    if (ferror()) {
-        perror("Erro escrevendo no arquivo");
-        return ERRO;
-    }
-
     return SUCESSO;
 }
 
-char *readLine(char *in) {
-    char *cptr;
+int setOutputFile(char file[STR_BUFFER]) {
+    outputFile = fopen(file, "+a");
+    if (outputFile == NULL) {
+        perror("Erro abrindo no arquivo");
+        return ERRO;
+    }
+    return SUCESSO;
+}
 
-    if (cptr = fgets(in, STR_BUFFER - 1, stdin)) {
-        // kill preceding whitespace but leave \n so we're guaranteed to have something
-        while (*cptr == ' ' || *cptr == '\t') {
-            cptr++;
+void processFile() {
+    FILE * fp;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    while ((read = getline(&line, &len, inputFile)) != -1) {
+        parseLine(line);
+    }
+}
+
+int parseLine(char *input) {
+    int i = 0;
+    char *p;
+    char *retornos[3];
+    p = strtok(input, " ");
+    if (p) {
+        retornos[i] = p;
+        i++;
+    }
+    while (p) {
+        p = strtok(NULL, " ");
+        if (p) {
+            retornos[i] = p;
+            i++;
         }
-        return cptr;
-    } else {
-        return 0;
     }
+    
+    exec(retornos);
+
+    if (PRINT_RETORNOS_PARSE) {
+        for (int x = 0; x < i; x++) {
+            printf("retornos[%d]: %s\n", x, retornos[x]);
+        }
+    }
+    return 0;
 }
 
-int x() {
-    char str[200];
-    FILE *fp = fopen("test.txt", "r");
-    if (!fp) return 1; // bail out if file not found
-    while (fgets(str, sizeof (str), fp) != NULL) {
-        int len = strlen(str) - 1;
-        if (str[len] == '')
-            str[len] = 0;
-        printf("%s", str);
+int writeFile(char *text) {
+    fwrite(text, sizeof (char), sizeof (text), outputFile);
+    if (ferror(outputFile)) {
+        perror("Erro escrevendo no arquivo");
+        return ERRO;
     }
-    fclose(fp);
+    return SUCESSO;
 }
-
-

@@ -1,61 +1,100 @@
 #include "Usuario.h"
+#include "Programacao.h"
+#include "Constantes.h"
 #include <string.h>
 
-typedef struct TUsuario {
+struct TUsuario {
     char *nome;
-    Usuario *esq;
-    Usuario *dir;
+    ListaProgramacao *prog;
 } Usuario;
+
+struct TListaUsuario {
+    Usuario *user;
+    ListaUsuario *ant;
+    ListaUsuario *prox;
+} ListaUsuario;
+
+struct TArvoreUsuario {
+    Usuario *user;
+    ArvoreUsuario *esq;
+    ArvoreUsuario *dir;
+} ArvoreUsuario;
 
 int insereUsuario(Usuario *usuario);
 void exibeUsuarios(int ordem, int k);
-
-//-- funcoes auxiliares
+void montaProgramacao();
 int existeUsuario(Usuario *usuario);
 
-int insereUsuario(Usuario *raiz, char *nome) {
-    if (!existeUsuario(nome)) {
+//-- funcoes auxiliares
+int insereUsuario(ArvoreUsuario *raiz, Usuario *user) {
+    if (!existeUsuario(user)) {
         if (raiz == NULL) {
-            raiz = (Usuario*) malloc(sizeof (Usuario));
-            raiz->nome = nome;
-            raiz->esq = NULL;
-            raiz->dir = NULL;
+            raiz->user = user;
             return raiz;
-        } else
-            if (strcmp(nome, raiz->nome) > 0) {
-            raiz->dir = insereUsuario(raiz->dir, nome);
         } else {
-            raiz->esq = insereUsuario(raiz->esq, nome);
+            if (strcmp(user->nome, raiz->user->nome) > 0) {
+                raiz->dir = insereUsuario(raiz->dir, user);
+            } else {
+                raiz->esq = insereUsuario(raiz->esq, user);
+            }
         }
+        return SUCESSO;
+    } else {
+        return USUARIO_JA_EXISTENTE;
     }
 
-    return 1;
 }
 
-int existeUsuario(Usuario *raiz, char *pesquisado) {
-    
-}
-
-void exibeUsuarios(){
-    
-}
-
-void centralEsquerda(Usuario *usuario, int limit) {
-    static count = 0;
-    count++;
-    if (usuario != NULL && count <= limit) {
-        centralEsquerda(usuario->esq);
-        printf("%d, ", usuario->nome);
-        centralEsquerda(usuario->dir);
+int existeUsuario(ArvoreUsuario *raiz, Usuario *user) {
+    Usuario encontrado = (Usuario*) malloc(sizeof(Usuario));
+    encontrado = consultaABP(raiz, user);
+    if(encontrado == NULL){
+        return USUARIO_NAO_ENCONTRADO;
+    }else{
+        return USUARIO_ENCONTRADO;
     }
 }
 
-void centralDireita(Usuario *usuario, int limit) {
+void exibeUsuarios(ArvoreUsuario *raiz, int ordem, int numUsuarios) {
+    switch(ordem){
+        case 1: //ASC
+            centralEsquerda(raiz, numUsuarios);
+        case 2: //DESC
+            centralDireita(raiz, numUsuarios);
+    }
+}
+
+Usuario* consultaABP(ArvoreUsuario *a, Usuario *user) {
+    if (a != NULL) {
+        if (strcmp(user->nome, a->user->nome) == 0)
+            return a->user;
+        else
+            if (strcmp(user->nome, a->user->nome) > 0)
+            return consultaABP(a->esq, user);
+
+        if (strcmp(user->nome, a->user->nome) < 0)
+            return consultaABP(a->dir, user);
+
+        else return a-> user;
+    } else return NULL;
+}
+
+void centralEsquerda(ArvoreUsuario *raiz, int limit) {
     static count = 0;
     count++;
-    if (usuario != NULL && count <= limit) {
-        centralDireita(usuario->dir);
-        printf("%d, ", usuario->nome);
-        centralDireita(usuario->esq);
+    if (raiz != NULL && count <= limit) {
+        centralEsquerda(raiz->esq);
+        printf("%s, ", raiz->user->nome);
+        centralEsquerda(raiz->dir);
+    }
+}
+
+void centralDireita(ArvoreUsuario *raiz, int limit) {
+    static count = 0;
+    count++;
+    if (raiz != NULL && count <= limit) {
+        centralDireita(raiz->dir);
+        printf("%d, ", raiz->user->nome);
+        centralDireita(raiz->esq);
     }
 }

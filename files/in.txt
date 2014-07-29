@@ -1,0 +1,49 @@
+e 1, 0
+e 2, 0
+e 1, 4
+e 2, 4
+u rodriguez		
+u neymar
+u messi
+u muller
+u benzema
+u neymar
+e 1, 0
+e 2, 0
+e 1, 4 
+e 2, 3
+p balotelli, progr01, musica01
+p neymar, progr01, musica01
+p neymar, progr01, musica02
+p neymar, progr01, musica03
+p neymar, progr01, musica04
+p neymar, progr01, musica05
+p messi, progr02, musica06
+p messi, progr02, musica07
+p messi, progr02, musica08
+p messi, progr02, musica09
+p messi, progr02, musica10
+p benzema, progr03, musica01
+p messi, progr02, musica02
+p messi, progr02, musica02
+p messi, progr02, musica06
+p messi, progr02, musica07
+c balotelli, neymar, progr01
+c messi, fred, progr01
+c benzema, muller, progr07
+c fred, balotelli, progr08
+c neymar, rodriguez, progr01
+c neymar, messi, progr01
+c messi, muller, progr02
+c benzema, neymar, progr03
+m progr09
+m progr02	progr02
+m progr01	progr01
+o neymar, progr01
+o messi, progr02
+o muller, progr02
+o benzema, progr03
+o neymar, progr03
+r 1
+r 5 
+r 10

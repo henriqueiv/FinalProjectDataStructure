@@ -6,13 +6,17 @@
                    projectFiles="true">
       <itemPath>Constantes.h</itemPath>
       <itemPath>FileHandler.h</itemPath>
-      <itemPath>Lista.h</itemPath>
+      <itemPath>Musica.h</itemPath>
+      <itemPath>Programacao.h</itemPath>
       <itemPath>Usuario.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>DataHandler.c</itemPath>
       <itemPath>FileHandler.c</itemPath>
+      <itemPath>Musica.c</itemPath>
+      <itemPath>Programacao.c</itemPath>
       <itemPath>Usuario.c</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -44,11 +48,19 @@
       </compileType>
       <item path="Constantes.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="DataHandler.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="FileHandler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="FileHandler.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Lista.h" ex="false" tool="3" flavor2="0">
+      <item path="Musica.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Musica.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Programacao.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Programacao.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Usuario.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -79,11 +91,19 @@
       </compileType>
       <item path="Constantes.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="DataHandler.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="FileHandler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="FileHandler.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Lista.h" ex="false" tool="3" flavor2="0">
+      <item path="Musica.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Musica.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Programacao.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Programacao.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Usuario.c" ex="false" tool="0" flavor2="0">
       </item>

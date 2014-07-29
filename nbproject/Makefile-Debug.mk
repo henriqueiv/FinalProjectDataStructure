@@ -35,7 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/DataHandler.o \
 	${OBJECTDIR}/FileHandler.o \
+	${OBJECTDIR}/Musica.o \
+	${OBJECTDIR}/Programacao.o \
 	${OBJECTDIR}/Usuario.o \
 	${OBJECTDIR}/main.o
 
@@ -64,10 +67,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/finalprojectdatastructure: ${OBJECTFI
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/finalprojectdatastructure ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/DataHandler.o: DataHandler.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DataHandler.o DataHandler.c
+
 ${OBJECTDIR}/FileHandler.o: FileHandler.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FileHandler.o FileHandler.c
+
+${OBJECTDIR}/Musica.o: Musica.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Musica.o Musica.c
+
+${OBJECTDIR}/Programacao.o: Programacao.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Programacao.o Programacao.c
 
 ${OBJECTDIR}/Usuario.o: Usuario.c 
 	${MKDIR} -p ${OBJECTDIR}
